@@ -101,12 +101,13 @@ def convert_intermediate_data(indata):
         kvp = d.split("=")
         name = kvp[0].strip().upper()
         vals = kvp[1].split()
-        # first element of block is the sequence id
-        block = [int(name)]
-        # second element of block is the patch data
-        block.append(list(map(lambda x:int(x,0) % (1<<16),vals)))
-        blocks.append(block)
-    
+        if len(vals) > 0:
+            # first element of block is the sequence id
+            block = [int(name)]
+            # second element of block is the patch data
+            block.append(list(map(lambda x:int(x,0) % (1<<16),vals)))
+            blocks.append(block)
+
     return blocks
 
 # create_raw_data() takes the intermediate data and produces the binary
